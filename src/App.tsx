@@ -26,7 +26,6 @@ function App() {
       headers: {
         // 'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'false'
       },
       body: JSON.stringify({
         query: `
