@@ -21,11 +21,12 @@ function App() {
   async function getData() {
 
     // desc seems to show the most recent
-    let res = await fetch(`https://api.thegraph.com/subgraphs/name/vishalkale151071/rain-protocol`, {
+    let res = await fetch(`https://api.thegraph.com/subgraphs/name/beehive-innovation/rain-protocol`, {
       method: 'POST',
       headers: {
         // 'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'false'
       },
       body: JSON.stringify({
         query: `
