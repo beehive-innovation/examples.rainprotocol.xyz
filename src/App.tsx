@@ -37,6 +37,7 @@ import TreasuryAssetCaller from "./pages/TreasuryAssetCaller";
 import TreasuryAssetPage from "./pages/TreasuryAssetPage";
 import TrustFactoryPage from "./pages/TrustFactoryPage";
 import UnseedPage from "./pages/UnseedPage";
+import TrustPage from "./pages/TrustPage";
 
 const drawerWidth = 240;
 
@@ -352,6 +353,13 @@ function App() {
               path="/swap"
               element={
                 <SwapPage />
+              }
+            />
+            <Route
+              key={'trustpage'}
+              path="/trust"
+              element={
+                <TrustPage />
               }
             />
             <Route
