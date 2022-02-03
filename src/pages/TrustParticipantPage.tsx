@@ -76,6 +76,9 @@ export default function TrustParticipantPage({}: any) {
     <div>
 
       <h1>Trust Participants</h1>
+      <h2>Type:</h2>
+      <p>Trust Participant</p>
+
       <h2>High Level View:</h2>
       <p>Trust Participants represents...</p>
 
