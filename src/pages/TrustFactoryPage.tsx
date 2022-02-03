@@ -56,7 +56,7 @@ export default function TrustFactoryPage({}: any) {
   return (
     <div>
 
-      <h1>Type: TrustFactory</h1>
+      <h1>Entity: TrustFactory</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

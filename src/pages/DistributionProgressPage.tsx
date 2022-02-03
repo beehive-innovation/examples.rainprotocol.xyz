@@ -56,7 +56,7 @@ export default function DistributionProgressPage({}: any) {
   return (
     <div>
 
-      <h1>Type: DistributionProgress</h1>
+      <h1>Entity: DistributionProgress</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

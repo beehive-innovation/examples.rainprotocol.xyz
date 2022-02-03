@@ -56,7 +56,7 @@ export default function DutchAuctionPage({}: any) {
   return (
     <div>
 
-      <h1>Type: DutchAuction</h1>
+      <h1>Entity: DutchAuction</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

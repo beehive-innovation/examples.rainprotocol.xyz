@@ -56,7 +56,7 @@ export default function TreasuryAssetCaller({}: any) {
   return (
     <div>
 
-      <h1>Type: TreasuryAssetCaller</h1>
+      <h1>Entity: TreasuryAssetCaller</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

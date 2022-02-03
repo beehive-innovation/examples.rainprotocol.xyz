@@ -56,7 +56,7 @@ export default function CRPPage({}: any) {
   return (
     <div>
 
-      <h1>Type: CRP</h1>
+      <h1>Entity: CRP</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

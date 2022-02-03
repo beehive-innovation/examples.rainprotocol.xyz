@@ -56,7 +56,7 @@ export default function RedeemSeedPage({}: any) {
   return (
     <div>
 
-      <h1>Type: RedeemSeed</h1>
+      <h1>Entity: RedeemSeed</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

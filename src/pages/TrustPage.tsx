@@ -56,7 +56,7 @@ export default function TrustPage({}: any) {
   return (
     <div>
 
-      <h1>Type: Trust</h1>
+      <h1>Entity: Trust</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

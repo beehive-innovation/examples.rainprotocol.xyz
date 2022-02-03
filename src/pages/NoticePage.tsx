@@ -56,7 +56,7 @@ export default function NoticePage({}: any) {
   return (
     <div>
 
-      <h1>Type: Notice</h1>
+      <h1>Entity: Notice</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

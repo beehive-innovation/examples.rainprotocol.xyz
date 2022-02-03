@@ -56,7 +56,7 @@ export default function SeedPage({}: any) {
   return (
     <div>
 
-      <h1>Type: Seed</h1>
+      <h1>Entity: Seed</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

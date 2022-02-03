@@ -56,7 +56,7 @@ export default function SwapPage({}: any) {
   return (
     <div>
 
-      <h1>Type: Swap</h1>
+      <h1>Entity: Swap</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

@@ -56,7 +56,7 @@ export default function HolderPage({}: any) {
   return (
     <div>
 
-      <h1>Type: Holder</h1>
+      <h1>Entity: Holder</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

@@ -56,7 +56,7 @@ export default function RedeemableERC20PoolPage({}: any) {
   return (
     <div>
 
-      <h1>Type: RedeemableERC20Pool</h1>
+      <h1>Entity: RedeemableERC20Pool</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

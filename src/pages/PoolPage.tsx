@@ -56,7 +56,7 @@ export default function PoolPage({}: any) {
   return (
     <div>
 
-      <h1>Type: Pool</h1>
+      <h1>Entity: Pool</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

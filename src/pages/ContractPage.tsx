@@ -69,7 +69,7 @@ export default function ContractPage({}: any) {
   return (
     <div>
 
-      <h1>Type: Contracts</h1>
+      <h1>Entity: Contracts</h1>
 
       <h2>High Level View:</h2>
       <p>Contracts represents...</p>

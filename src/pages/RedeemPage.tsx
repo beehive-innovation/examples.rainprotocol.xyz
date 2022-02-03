@@ -56,7 +56,7 @@ export default function RedeemPage({}: any) {
   return (
     <div>
 
-      <h1>Type: Redeem</h1>
+      <h1>Entity: Redeem</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

@@ -56,7 +56,7 @@ export default function TreasuryAssetPage({}: any) {
   return (
     <div>
 
-      <h1>Type: TreasuryAsset</h1>
+      <h1>Entity: TreasuryAsset</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

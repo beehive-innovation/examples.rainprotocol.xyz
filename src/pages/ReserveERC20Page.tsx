@@ -56,7 +56,7 @@ export default function ReserveERC20Page({}: any) {
   return (
     <div>
 
-      <h1>Type: ReserveERC20</h1>
+      <h1>Entity: ReserveERC20</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>

@@ -56,7 +56,7 @@ export default function UnseedPage({}: any) {
   return (
     <div>
 
-      <h1>Type: Unseed</h1>
+      <h1>Entity: Unseed</h1>
 
       <h2>High Level View:</h2>
       <p>This Type represents...</p>
