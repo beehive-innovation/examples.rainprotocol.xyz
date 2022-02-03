@@ -75,18 +75,25 @@ export default function TrustParticipantPage({}: any) {
   return (
     <div>
 
-      <h2>Trust Participants</h2>
+      <h1>Trust Participants</h1>
+      <h2>High Level View:</h2>
+      <p>Trust Participants represents...</p>
+
+      <h2>Use Case:</h2>
       <p>Say I want to answer a question such as: how many users are in the system, and what are their seed and token balances?
         I could use a call like the following to Trust Participants in order to answer such a question:</p>
 
+      <h2>GraphQL Query:</h2>
       <code>
         `{code}`
       </code>
 
       <br/>
 
+      <h2>Code:</h2>
       <p>In order to see how to do this in Javascript, visit the <a target="_blank" href="https://github.com/unegma/examples.rainprotocol.xyz.git">examples repo on Github</a></p>
 
+      <h2>Result:</h2>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
