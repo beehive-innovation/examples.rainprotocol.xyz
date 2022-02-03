@@ -27,8 +27,11 @@ export default function ContractPage({}: any) {
       body: JSON.stringify({
         query: `
           query {
-            contract(first: 10) {
+            contracts(first: 5) {
               id
+              seeder {
+                id
+              }
             }
           }
         `
@@ -61,9 +64,14 @@ export default function ContractPage({}: any) {
   }
 
   let code = `query {
-    contract(first: 10) {
-      id
-    }`;
+      contracts(first: 5) {
+        id
+        seeder {
+          id
+        }
+      }
+    }  
+  `;
 
 
   return (
@@ -93,7 +101,7 @@ export default function ContractPage({}: any) {
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              {/*<TableCell align="right">ID</TableCell>*/}
+              <TableCell>Seeder ID</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -105,7 +113,7 @@ export default function ContractPage({}: any) {
                 <TableCell component="th" scope="row">
                   {row.id}
                 </TableCell>
-                {/*<TableCell align="right">{row.seedBalance}</TableCell>*/}
+                <TableCell>{row.seeder.id}</TableCell>
               </TableRow>
             ))}
           </TableBody>
