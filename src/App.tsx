@@ -1,120 +1,135 @@
 import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
-// import Web3 from 'web3';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import {Typography} from "@mui/material";
+
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Toolbar from '@mui/material/Toolbar';
+import {
+  Route, Link, Routes
+} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import TrustParticipantPage from "./pages/TrustParticipantPage";
+
+const drawerWidth = 240;
 
 function App() {
 
-  const [data, setData] = useState([]);
+  // const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  useEffect(() => {
-    getData();
-  }, [])
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
-  async function getData() {
+  const drawer = (
+    <div>
+      <Toolbar />
+      <Divider />
+      <List>
+        <Link to="/">
+          <ListItem button>
+            <ListItemText primary={"Home"} />
+          </ListItem>
+        </Link>
+        <Link to="/trustparticipants">
+          <ListItem button>
+            <ListItemText primary={"Trust Participants"} />
+          </ListItem>
+        </Link>
+      </List>
+    </div>
+  );
 
-    // desc seems to show the most recent
-    let res = await fetch(`https://api.thegraph.com/subgraphs/name/beehive-innovation/rain-protocol`, {
-      method: 'POST',
-      headers: {
-        // 'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query: `
-          query {
-            trustParticipants(first: 10) {
-              id
-              user
-              tokenBalance
-              seedBalance
-            }
-          }
-        `
-      })
-    });
+  // const container = window !== undefined ? () => window().document.body : undefined;
 
-    // query {
-    //   trustFactories(first: 5) {
-    //     id
-    //     trustCount
-    //     trusts {
-    //       id
-    //     }
-    //   }
-    // }
 
-    // query {
-    //   trustParticipants {
-    //     id
-    //     user
-    //     tokenBalance
-    //     seedBalance
-    //   }
-    // }
-
-    res = await res.json();
-    console.log(res);
-    // @ts-ignore
-    setData(res.data.trustParticipants);
-  }
-
-  let code = `query {
-    trustParticipants(first: 10) {
-      id
-      user
-      tokenBalance
-      seedBalance
-    }`;
 
 
   return (
     <div>
-      <h2>Trust Participants</h2>
-      <p>Say I want to answer a question such as: how many users are in the system, and what are their seed and token balances?
-      I could use a call like the following to Trust Participants in order to answer such a question:</p>
 
-      <code>
-        `{code}`
-      </code>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+          }}
+        >
+          <Toolbar>
 
-      <br/>
+          </Toolbar>
+        </AppBar>
+        <Box
+          component="nav"
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          aria-label="mailbox folders"
+        >
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Drawer
+            // container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+          >
+            {drawer}
+          </Drawer>
+          <Drawer
+            variant="permanent"
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Box>
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        >
+          <Toolbar />
 
-      <p>In order to see how to do this in Javascript, visit the <a target="_blank" href="https://github.com/unegma/examples.rainprotocol.xyz.git">examples repo on Github</a></p>
+          <Routes>
+            <Route
+              key={'home'}
+              path="/"
+              element={
+                <HomePage />
+              }
+            />
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>User</TableCell>
-              <TableCell align="right">Seed Balance</TableCell>
-              <TableCell align="right">Token Balance</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row: any) => (
-              <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.user}
-                </TableCell>
-                <TableCell align="right">{row.seedBalance}</TableCell>
-                <TableCell align="right">{row.tokenBalance}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            <Route
+              key={'trustparticipantpage'}
+              path="/trustparticipants"
+              element={
+                <TrustParticipantPage />
+              }
+            />
+
+            {/*<Redirect to="/" />*/}
+          </Routes>
+        </Box>
+      </Box>
+
+
 
 
     </div>
