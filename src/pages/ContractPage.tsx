@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 
-export default function TrustParticipantPage({}: any) {
+export default function ContractPage({}: any) {
 
   const [data, setData] = useState([]);
 
@@ -27,11 +27,8 @@ export default function TrustParticipantPage({}: any) {
       body: JSON.stringify({
         query: `
           query {
-            trustParticipants(first: 10) {
+            contract(first: 10) {
               id
-              user
-              tokenBalance
-              seedBalance
             }
           }
         `
@@ -60,29 +57,25 @@ export default function TrustParticipantPage({}: any) {
     res = await res.json();
     console.log(res);
     // @ts-ignore
-    setData(res.data.trustParticipants);
+    setData(res.data.contracts);
   }
 
   let code = `query {
-    trustParticipants(first: 10) {
+    contract(first: 10) {
       id
-      user
-      tokenBalance
-      seedBalance
     }`;
 
 
   return (
     <div>
 
-      <h1>Type: TrustParticipant</h1>
+      <h1>Type: Contracts</h1>
 
       <h2>High Level View:</h2>
-      <p>Trust Participants represents...</p>
+      <p>Contracts represents...</p>
 
       <h2>Use Case:</h2>
-      <p>Say I want to answer a question such as: how many users are in the system, and what are their seed and token balances?
-        I could use a call like the following to Trust Participants in order to answer such a question:</p>
+      <p>An example where Contracts could be used would be: </p>
 
       <h2>GraphQL Query:</h2>
       <code>
@@ -99,9 +92,8 @@ export default function TrustParticipantPage({}: any) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>User</TableCell>
-              <TableCell align="right">Seed Balance</TableCell>
-              <TableCell align="right">Token Balance</TableCell>
+              <TableCell>ID</TableCell>
+              {/*<TableCell align="right">ID</TableCell>*/}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -111,10 +103,9 @@ export default function TrustParticipantPage({}: any) {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.user}
+                  {row.id}
                 </TableCell>
-                <TableCell align="right">{row.seedBalance}</TableCell>
-                <TableCell align="right">{row.tokenBalance}</TableCell>
+                {/*<TableCell align="right">{row.seedBalance}</TableCell>*/}
               </TableRow>
             ))}
           </TableBody>
