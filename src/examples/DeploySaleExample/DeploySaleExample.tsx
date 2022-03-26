@@ -29,6 +29,9 @@ export default function DeploySaleExample({}: any) {
   const [saleState, setSaleState] = useState(defaults.sale);
   const [redeemableState, setRedeemableState] = useState(defaults.redeemable);
 
+  /**
+   * Minimal connectWalletHandler functinality
+   */
   const connectWalletHandler = async () => {
     // @ts-ignore
     const { ethereum } = window;
@@ -49,6 +52,9 @@ export default function DeploySaleExample({}: any) {
     }
   }
 
+  /**
+   * Function for handling when the user submits the form
+   */
   const deploySaleExample = async () => {
     // @ts-ignore
     const { ethereum } = window;
@@ -83,6 +89,9 @@ export default function DeploySaleExample({}: any) {
     }
   }
 
+  /**
+   * View
+   */
   return (
     <div className="App">
       <main className="App-main">
