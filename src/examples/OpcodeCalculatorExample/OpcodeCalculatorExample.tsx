@@ -4,7 +4,7 @@ import { networks } from "./networks";
 // import { isAfterBlockNumber } from "./opcodeExample";
 import {ContractInterface, ethers} from 'ethers';
 import calculatorTest from "./calculatorTestABI.json";
-import {Button, Typography} from "@mui/material";
+import {Box, Button, Divider, Link, Typography} from "@mui/material";
 
 export default function OpcodeCalculatorExample({}: any) {
 
@@ -89,7 +89,22 @@ export default function OpcodeCalculatorExample({}: any) {
         <br/>
 
         <Typography>{result}</Typography>
+
+        <br/>
+
+        <Divider variant="middle" style={{ background: 'white', width: '90%' }} />
+
+        <br/>
+
+        <Link href="https://docs.rainprotocol.xyz/guides/Opcodes/running-an-opcodes-example" variant="body2">
+          Tutorial
+        </Link>
+
+        <Link href="https://github.com/beehive-innovation/examples.rainprotocol.xyz" variant="body2">
+          Github
+        </Link>
       </main>
+
     </div>
   )
 }

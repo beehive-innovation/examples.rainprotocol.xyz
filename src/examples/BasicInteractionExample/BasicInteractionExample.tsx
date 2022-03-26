@@ -4,7 +4,7 @@ import { networks } from "./networks";
 // import { isAfterBlockNumber } from "./opcodeExample";
 import {ContractInterface, ethers} from 'ethers';
 import saleContractABI from "./saleContractABI.json";
-import {Button, Typography} from "@mui/material";
+import {Button, Divider, Link, Typography} from "@mui/material";
 
 export default function BasicInteractionExample({}: any) {
 
@@ -91,6 +91,20 @@ export default function BasicInteractionExample({}: any) {
         <Typography>{result}</Typography>
 
         {/* todo add link to tutorial and github (and to this on the tutorial), also explain that material-ui is used*/}
+
+        <br/>
+
+        <Divider variant="middle" style={{ background: 'white', width: '90%' }} />
+
+        <br/>
+
+        <Link href="https://docs.rainprotocol.xyz/guides/Opcodes/running-an-opcodes-example" variant="body2">
+          Tutorial
+        </Link>
+
+        <Link href="https://github.com/beehive-innovation/examples.rainprotocol.xyz" variant="body2">
+          Github
+        </Link>
 
       </main>
     </div>
