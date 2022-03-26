@@ -70,6 +70,11 @@ export default function OpcodeCalculatorExample({}: any) {
 
         <Typography variant="h4">Opcode Calculator Example</Typography>
 
+
+        <Typography variant="h4">(IN PROGRESS)</Typography>
+
+
+
         <br/>
 
         <Button variant="contained" onClick={connectWalletHandler}>
