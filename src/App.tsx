@@ -15,6 +15,7 @@ import BasicInteractionExample from "./examples/BasicInteractionExample/BasicInt
 import HomePage from "./pages/HomePage";
 import ListItemLink from "./components/ListItemLink";
 import OpcodeCalculatorExample from "./examples/OpcodeCalculatorExample/OpcodeCalculatorExample";
+import DeploySaleExample from "./examples/DeploySaleExample/DeploySaleExample";
 
 const drawerWidth = 240;
 
@@ -35,6 +36,7 @@ function App() {
         <ListItemLink to="/" text="Home" />
         <ListItemLink to="/basic-interaction-example" text="Basic Interaction Example" />
         <ListItemLink to="/opcode-calculator-example" text="Opcode Calculator Example" />
+        <ListItemLink to="/deploy-sale-example" text="Deploy Sale Example" />
       </List>
     </div>
   );
@@ -117,6 +119,13 @@ function App() {
               path="/opcode-calculator-example"
               element={
                 <OpcodeCalculatorExample />
+              }
+            />
+            <Route
+              key={'deploy-sale-example'}
+              path="/deploy-sale-example"
+              element={
+                <DeploySaleExample />
               }
             />
 
