@@ -4,6 +4,7 @@ import { networks } from "./networks";
 // import { isAfterBlockNumber } from "./opcodeExample";
 import {ContractInterface, ethers} from 'ethers';
 import saleContractABI from "./saleContractABI.json";
+import {Button, Typography} from "@mui/material";
 
 export default function BasicInteractionExample({}: any) {
 
@@ -66,17 +67,23 @@ export default function BasicInteractionExample({}: any) {
   return (
     <div className="App">
       <header className="App-header">
-        <button onClick={connectWalletHandler}>
+        <Button variant="contained" onClick={connectWalletHandler}>
           Connect
-        </button>
+        </Button>
 
-        <p>{`Connected as: ${currentAccount}`}</p>
+        <br/>
 
-        <button onClick={runOpcodesExample}>
+        <Typography>{`Connected as: ${currentAccount}`}</Typography>
+
+        <br/>
+
+        <Button variant="contained" onClick={runOpcodesExample}>
           Run Sale Example
-        </button>
+        </Button>
 
-        <p>{result}</p>
+        <br/>
+
+        <Typography>{result}</Typography>
       </header>
     </div>
   )
