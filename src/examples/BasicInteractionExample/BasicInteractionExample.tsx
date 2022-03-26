@@ -66,7 +66,7 @@ export default function BasicInteractionExample({}: any) {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <main className="App-main">
         <Button variant="contained" onClick={connectWalletHandler}>
           Connect
         </Button>
@@ -87,7 +87,7 @@ export default function BasicInteractionExample({}: any) {
 
         {/* todo add link to tutorial and github (and to this on the tutorial), also explain that material-ui is used*/}
 
-      </header>
+      </main>
     </div>
   )
 }

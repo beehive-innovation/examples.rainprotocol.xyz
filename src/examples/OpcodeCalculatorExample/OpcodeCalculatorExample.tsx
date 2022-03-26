@@ -66,7 +66,7 @@ export default function OpcodeCalculatorExample({}: any) {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <main className="App-main">
         <Button variant="contained" onClick={connectWalletHandler}>
           Connect
         </Button>
@@ -84,7 +84,7 @@ export default function OpcodeCalculatorExample({}: any) {
         <br/>
 
         <Typography>{result}</Typography>
-      </header>
+      </main>
     </div>
   )
 }
