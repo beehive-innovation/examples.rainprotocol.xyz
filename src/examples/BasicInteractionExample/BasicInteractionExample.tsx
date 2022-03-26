@@ -67,6 +67,11 @@ export default function BasicInteractionExample({}: any) {
   return (
     <div className="App">
       <main className="App-main">
+
+        <Typography variant="h4">Basic Interaction Example</Typography>
+
+        <br/>
+
         <Button variant="contained" onClick={connectWalletHandler}>
           Connect
         </Button>
