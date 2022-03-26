@@ -1,24 +1,32 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import FilledInput from '@mui/material/FilledInput';
 import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import {useEffect} from "react";
 
-// todo add a disclaimer that these examples are examples and dont necessarily follow best codin practices
-
+/**
+ * Sale Form - please note that these examples are examples and don't necessarily follow best coding practices
+ *
+ * @param defaults
+ * @param saleState
+ * @param setSaleState
+ * @param currentAccount
+ * @constructor
+ */
 export default function SaleForm ({defaults, saleState, setSaleState, currentAccount}: any) {
 
-  // const [reserve, setReserve] = React.useState(defaults.reserve);
-
+  /**
+   * Watch currentAccount for when it is changed
+   */
   useEffect(() => {
     handleChangeState(currentAccount, 'recipient');
   }, [currentAccount]);
 
-
+  /**
+   * @param value
+   * @param type Corresponds to the keys in defaults.json
+   */
   const handleChangeState = (value: any, type: any) => {
     saleState[type] = value;
     setSaleState(saleState);
@@ -30,9 +38,6 @@ export default function SaleForm ({defaults, saleState, setSaleState, currentAcc
       component="form"
       sx={{
         '& > :not(style)': { m: 1 },
-        // minWidth: '500px',
-        // minHeight: '500px',
-        // bgcolor: 'white',
       }}
       noValidate
       autoComplete="off"
@@ -49,16 +54,6 @@ export default function SaleForm ({defaults, saleState, setSaleState, currentAcc
           label="Recipient (use connect above)"
         />
       </FormControl>
-      {/*<br/>*/}
-      {/*<FormControl>*/}
-      {/*  <InputLabel htmlFor="component-outlined">Reserve</InputLabel>*/}
-      {/*  <OutlinedInput*/}
-      {/*    id="component-outlined"*/}
-      {/*    defaultValue={defaults.reserve}*/}
-      {/*    onChange={(event) => { handleChangeState(event.target.value,'reserve')}}*/}
-      {/*    label="Reserve"*/}
-      {/*  />*/}
-      {/*</FormControl>*/}
     </Box>
   )
 }

@@ -5,13 +5,14 @@ import {ethers} from 'ethers';
 import saleFactoryABI from "./saleFactoryABI.json";
 import defaults from "./defaults.json";
 import {Button, Divider, Link, Typography} from "@mui/material";
-import DeploySaleForm from "./SaleForm";
 import SaleForm from "./SaleForm";
+import RedeemableForm from "./RedeemableForm";
 
 export default function DeploySaleExample({}: any) {
 
   const [currentAccount, setCurrentAccount] = useState("");
-  const [saleState, setSaleState] = useState(defaults);
+  const [saleState, setSaleState] = useState(defaults.sale);
+  const [redeemableState, setRedeemableState] = useState(defaults.redeemable);
 
   const connectWalletHandler = async () => {
     // @ts-ignore
@@ -33,7 +34,7 @@ export default function DeploySaleExample({}: any) {
     }
   }
 
-  const deployeSaleExample = async () => {
+  const deploySaleExample = async () => {
     // @ts-ignore
     const { ethereum } = window;
 
@@ -62,8 +63,6 @@ export default function DeploySaleExample({}: any) {
       console.log(deployedAddress);
       // setResult(`Result: ${price._hex}`);
 
-      // TODO ADD FUNCTIONALITY FOR CALLING THE SMART CONTRACT WITH THE OPCODE
-
     } catch (err) {
       console.log(err);
     }
@@ -87,19 +86,13 @@ export default function DeploySaleExample({}: any) {
 
         <br/>
 
+        <SaleForm defaults={defaults.sale} saleState={saleState} setSaleState={setSaleState} currentAccount={currentAccount}/>
 
-        <SaleForm defaults={defaults} saleState={saleState} setSaleState={setSaleState} currentAccount={currentAccount}/>
+        <RedeemableForm defaults={defaults.redeemable} redeemableState={redeemableState} setRedeembableState={setRedeemableState}/>
 
-
-        <Button variant="contained" onClick={deployeSaleExample}>
+        <Button variant="contained" onClick={deploySaleExample}>
           Deploy Sale Example
         </Button>
-
-        <br/>
-
-        {/*<Typography>{result}</Typography>*/}
-
-        {/* todo add link to tutorial and github (and to this on the tutorial), also explain that material-ui is used*/}
 
         <br/>
 
