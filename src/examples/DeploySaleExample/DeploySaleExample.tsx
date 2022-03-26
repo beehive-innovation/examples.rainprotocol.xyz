@@ -8,6 +8,21 @@ import {Button, Divider, Link, Typography} from "@mui/material";
 import SaleForm from "./SaleForm";
 import RedeemableForm from "./RedeemableForm";
 
+/**
+ * DeploySaleExample
+ * An example of how to create a Sale contract (using the Sale factory).
+ *
+ * This example will use USDCC (see the `redeemable` parameter in defaults)
+ * This example will let the user define limited parameters in order to show functionality.
+ *
+ * Please be aware that this example does not follow best practices as there is no validation in place as
+ * well as other checks which have been left out (especially re wallet connection/network switching).
+ *
+ * These have been left out for simplicity so the user can isolate the required functionality more easily
+ * and iterate on that with their own setup.
+ *
+ * @constructor
+ */
 export default function DeploySaleExample({}: any) {
 
   const [currentAccount, setCurrentAccount] = useState("");
@@ -43,7 +58,7 @@ export default function DeploySaleExample({}: any) {
     }
 
     try {
-      console.log(saleState);
+      console.log('Submitting the following state:', saleState, redeemableState);
 
       const provider = new ethers.providers.Web3Provider(ethereum, {
         name: networks[0].config.chainName,
