@@ -14,6 +14,7 @@ import {
 import BasicInteractionExample from "./examples/BasicInteractionExample/BasicInteractionExample";
 import HomePage from "./pages/HomePage";
 import ListItemLink from "./components/ListItemLink";
+import OpcodeCalculatorExample from "./examples/OpcodeCalculatorExample/OpcodeCalculatorExample";
 
 const drawerWidth = 240;
 
@@ -33,6 +34,7 @@ function App() {
       <List>
         <ListItemLink to="/" text="Home" />
         <ListItemLink to="/basic-interaction-example" text="Basic Interaction Example" />
+        <ListItemLink to="/opcode-calculator-example" text="Opcode Calculator Example" />
       </List>
     </div>
   );
@@ -108,6 +110,13 @@ function App() {
               path="/basic-interaction-example"
               element={
                 <BasicInteractionExample />
+              }
+            />
+            <Route
+              key={'opcode-calculator-example'}
+              path="/opcode-calculator-example"
+              element={
+                <OpcodeCalculatorExample />
               }
             />
 
