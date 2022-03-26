@@ -5,9 +5,9 @@ export default function HomePage({}: any) {
 
   return (
     <div>
-      <h2>Home</h2>
+      <h2>Examples</h2>
 
-      <a target="_blank" href="https://thegraph.com/hosted-service/subgraph/beehive-innovation/rain-protocol">Subgraph Link</a>
+      <a target="_blank" href="https://thegraph.com/hosted-service/subgraph/beehive-innovation/rain-protocol">Also check out the Subgraph Playground</a>
     </div>
   )
 }
