@@ -2,7 +2,7 @@ import '../../App.css';
 import React, {useState} from 'react';
 import { networks } from "./networks";
 import {ethers} from 'ethers';
-import saleContractABI from "./saleContractABI.json";
+import saleFactoryABI from "./saleFactoryABI.json";
 import defaults from "./defaults.json";
 import {Button, Divider, Link, Typography} from "@mui/material";
 import DeploySaleForm from "./SaleForm";
@@ -42,22 +42,24 @@ export default function DeploySaleExample({}: any) {
     }
 
     try {
-      // const contractInstance = new ethers.Contract(saleContractABI.abi as AbiItem[], networks[0].addresses.SALE_EXAMPLE, ethereum);
-
       console.log(saleState);
 
-      // todo will use typechain
-      // const provider = new ethers.providers.Web3Provider(ethereum, "any");
+      const provider = new ethers.providers.Web3Provider(ethereum, {
+        name: networks[0].config.chainName,
+        chainId: parseInt(networks[0].config.chainId),
+      });
+
       // Prompt user for account connections
-      // await provider.send("eth_requestAccounts", []);
-      // const signer = provider.getSigner();
-      // console.log("Account:", await signer.getAddress());
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      console.log("Account:", await signer.getAddress());
 
+      // todo will use typechain
       // @ts-ignore
-      // const contractInstance = new ethers.Contract(networks[0].addresses.SALE_EXAMPLE, saleContractABI.abi, signer);
-      // const price = await contractInstance.calculatePrice(2);
+      const contractInstance = new ethers.Contract(networks[0].addresses.SALE_FACTORY, saleFactoryABI.abi, signer);
+      const deployedAddress = await contractInstance.createChild(saleState);
 
-      // console.log(price);
+      console.log(deployedAddress);
       // setResult(`Result: ${price._hex}`);
 
       // TODO ADD FUNCTIONALITY FOR CALLING THE SMART CONTRACT WITH THE OPCODE
