@@ -5,11 +5,13 @@ import {ethers} from 'ethers';
 import saleContractABI from "./saleContractABI.json";
 import defaults from "./defaults.json";
 import {Button, Divider, Link, Typography} from "@mui/material";
+import DeploySaleForm from "./SaleForm";
+import SaleForm from "./SaleForm";
 
 export default function DeploySaleExample({}: any) {
 
-  const [currentAccount, setCurrentAccount] = useState(null);
-  const [result, setResult] = useState("Result: ");
+  const [currentAccount, setCurrentAccount] = useState("");
+  const [saleState, setSaleState] = useState(defaults);
 
   const connectWalletHandler = async () => {
     // @ts-ignore
@@ -31,7 +33,7 @@ export default function DeploySaleExample({}: any) {
     }
   }
 
-  const runOpcodesExample = async () => {
+  const deployeSaleExample = async () => {
     // @ts-ignore
     const { ethereum } = window;
 
@@ -42,20 +44,21 @@ export default function DeploySaleExample({}: any) {
     try {
       // const contractInstance = new ethers.Contract(saleContractABI.abi as AbiItem[], networks[0].addresses.SALE_EXAMPLE, ethereum);
 
+      console.log(saleState);
 
       // todo will use typechain
-      const provider = new ethers.providers.Web3Provider(ethereum, "any");
+      // const provider = new ethers.providers.Web3Provider(ethereum, "any");
       // Prompt user for account connections
-      await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner();
-      console.log("Account:", await signer.getAddress());
+      // await provider.send("eth_requestAccounts", []);
+      // const signer = provider.getSigner();
+      // console.log("Account:", await signer.getAddress());
 
       // @ts-ignore
-      const contractInstance = new ethers.Contract(networks[0].addresses.SALE_EXAMPLE, saleContractABI.abi, signer);
-      const price = await contractInstance.calculatePrice(2);
+      // const contractInstance = new ethers.Contract(networks[0].addresses.SALE_EXAMPLE, saleContractABI.abi, signer);
+      // const price = await contractInstance.calculatePrice(2);
 
-      console.log(price);
-      setResult(`Result: ${price._hex}`);
+      // console.log(price);
+      // setResult(`Result: ${price._hex}`);
 
       // TODO ADD FUNCTIONALITY FOR CALLING THE SMART CONTRACT WITH THE OPCODE
 
@@ -82,13 +85,17 @@ export default function DeploySaleExample({}: any) {
 
         <br/>
 
-        <Button variant="contained" onClick={runOpcodesExample}>
+
+        <SaleForm defaults={defaults} saleState={saleState} setSaleState={setSaleState} currentAccount={currentAccount}/>
+
+
+        <Button variant="contained" onClick={deployeSaleExample}>
           Deploy Sale Example
         </Button>
 
         <br/>
 
-        <Typography>{result}</Typography>
+        {/*<Typography>{result}</Typography>*/}
 
         {/* todo add link to tutorial and github (and to this on the tutorial), also explain that material-ui is used*/}
 
