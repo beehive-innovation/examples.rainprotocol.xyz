@@ -84,6 +84,9 @@ export default function BasicInteractionExample({}: any) {
         <br/>
 
         <Typography>{result}</Typography>
+
+        {/* todo add link to tutorial and github (and to this on the tutorial), also explain that material-ui is used*/}
+
       </header>
     </div>
   )
