@@ -88,7 +88,7 @@ export default function DeploySaleExample({}: any) {
 
         <SaleForm defaults={defaults.sale} saleState={saleState} setSaleState={setSaleState} currentAccount={currentAccount}/>
 
-        <RedeemableForm defaults={defaults.redeemable} redeemableState={redeemableState} setRedeembableState={setRedeemableState}/>
+        <RedeemableForm defaults={defaults.redeemable} redeemableState={redeemableState} setRedeemableState={setRedeemableState}/>
 
         <Button variant="contained" onClick={deploySaleExample}>
           Deploy Sale Example
