@@ -8,6 +8,7 @@ import saleContractABI from "./saleContractABI.json";
 export default function BasicInteractionExample({}: any) {
 
   const [currentAccount, setCurrentAccount] = useState(null);
+  const [result, setResult] = useState("Result: ");
 
   const connectWalletHandler = async () => {
     // @ts-ignore
@@ -53,6 +54,7 @@ export default function BasicInteractionExample({}: any) {
       const price = await contractInstance.calculatePrice(2);
 
       console.log(price);
+      setResult(`Result: ${price._hex}`);
 
       // TODO ADD FUNCTIONALITY FOR CALLING THE SMART CONTRACT WITH THE OPCODE
 
@@ -68,9 +70,13 @@ export default function BasicInteractionExample({}: any) {
           Connect
         </button>
 
+        <p>{`Connected as: ${currentAccount}`}</p>
+
         <button onClick={runOpcodesExample}>
           Run Sale Example
         </button>
+
+        <p>{result}</p>
       </header>
     </div>
   )

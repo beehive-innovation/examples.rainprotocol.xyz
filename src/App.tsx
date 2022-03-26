@@ -49,6 +49,8 @@ function App() {
           sx={{
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             ml: { sm: `${drawerWidth}px` },
+            bgcolor: 'background.paper',
+            boxShadow: 1
           }}
         >
           <Toolbar>
