@@ -79,7 +79,7 @@ export default function DeploySaleExample({}: any) {
       // todo will use typechain
       // @ts-ignore
       const contractInstance = new ethers.Contract(networks[0].addresses.SALE_FACTORY, saleFactoryABI.abi, signer);
-      const deployedAddress = await contractInstance.createChild(saleState);
+      const deployedAddress = await contractInstance.createChildTyped(saleState, redeemableState);
 
       console.log(deployedAddress);
       // setResult(`Result: ${price._hex}`);
