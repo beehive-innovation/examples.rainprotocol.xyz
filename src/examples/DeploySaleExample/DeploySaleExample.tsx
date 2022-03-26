@@ -1,9 +1,9 @@
 import '../../App.css';
 import React, {useState} from 'react';
 import { networks } from "./networks";
-// import { isAfterBlockNumber } from "./opcodeExample";
-import {ContractInterface, ethers} from 'ethers';
+import {ethers} from 'ethers';
 import saleContractABI from "./saleContractABI.json";
+import defaults from "./defaults.json";
 import {Button, Divider, Link, Typography} from "@mui/material";
 
 export default function DeploySaleExample({}: any) {
