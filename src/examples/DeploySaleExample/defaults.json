@@ -12,10 +12,10 @@
     "name": "Raise token",
     "symbol": "rTKN",
     "initialSupply": 1000,
-    "distributionEndForwardingAddress": null,
+    "distributionEndForwardingAddress": "0x0000000000000000000000000000000000000000",
     "walletCap": 10,
     "tier": "0xC064055DFf6De32f44bB7cCB0ca59Cbd8434B2de",
-    "minimumStatus": 0,
+    "minimumTier": 0,
     "raiseRange": null
   }
 }

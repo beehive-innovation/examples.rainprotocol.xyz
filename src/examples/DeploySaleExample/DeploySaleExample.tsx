@@ -1,16 +1,15 @@
-import '../../App.css';
-import React, {useState} from 'react';
+import "../../App.css";
+import React, { useState } from "react";
 import { networks } from "./networks";
-import {Contract, ethers} from 'ethers';
+import { Contract, ethers } from "ethers";
 import saleFactoryABI from "./saleFactoryABI.json";
 import saleContractABI from "./saleContractABI.json";
 import defaults from "./defaults.json";
-import {Button, Divider, Link, Typography} from "@mui/material";
+import { Button, Divider, Link, Typography } from "@mui/material";
 import SaleForm from "./SaleForm";
 import RedeemableForm from "./RedeemableForm";
-import {concat} from "ethers/lib/utils";
-import { op } from './utils';
-
+import { concat } from "ethers/lib/utils";
+import { op } from "./utils";
 
 export const enum Opcode {
   SKIP,
@@ -84,7 +83,6 @@ export const afterTimestampConfig = (timestamp: any) => {
   };
 };
 
-
 /**
  * DeploySaleExample
  * An example of how to create a Sale contract (using the Sale factory).
@@ -101,7 +99,6 @@ export const afterTimestampConfig = (timestamp: any) => {
  * @constructor
  */
 export default function DeploySaleExample({}: any) {
-
   const [currentAccount, setCurrentAccount] = useState("");
   const [saleState, setSaleState] = useState(defaults.sale);
   const [redeemableState, setRedeemableState] = useState(defaults.redeemable);
@@ -119,7 +116,7 @@ export default function DeploySaleExample({}: any) {
 
     try {
       const accounts = await ethereum.request({
-        method: 'eth_requestAccounts',
+        method: "eth_requestAccounts",
         chainId: networks[0].config.chainId,
       });
       console.log(`Address ${accounts[0]} connected`);
@@ -127,7 +124,7 @@ export default function DeploySaleExample({}: any) {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   /**
    * Function for handling when the user submits the form
@@ -159,7 +156,6 @@ export default function DeploySaleExample({}: any) {
         signer
       );
 
-
       const staticPrice = 100; // todo this might not work and is not currently retreived dynamically here from a reserveErc20
       const walletCap = 10; // too see above
 
@@ -179,29 +175,45 @@ export default function DeploySaleExample({}: any) {
         ]),
       ];
 
-      let raiseRange;
+      // TODO: This is sent to `afterTimestampConfig` function and cause the `constant` being a NaN
+      // let raiseRange;
+      // In the rain tool kit, this variable is set with a range of dates on front end where [0] is start date
+      // and [1] is end date.
+      // I added both Dates:
+      // The startDate is raiseRange[0] and will be the current Date
+      // The endDate is raiseRange[1] and will be the current Date + 30 minutes (30 * 60000 miliseconds)
+      const currentDate = new Date();
+      const raiseRange = [
+        currentDate,
+        new Date(currentDate.getTime() + 30 * 60000),
+      ];
+      // let raiseRange;
 
       let extendedSaleState: any = saleState;
       extendedSaleState.canStartStateConfig = afterTimestampConfig(
+        Math.floor(raiseRange[0].getTime() / 1000)
         // @ts-ignore
-        Math.floor(raiseRange?.[0].$d.getTime() / 1000)
-      )
+        // Math.floor(raiseRange?.[0].$d.getTime() / 1000)
+      );
       extendedSaleState.canEndStateConfig = afterTimestampConfig(
+        Math.floor(raiseRange[1].getTime() / 1000)
         // @ts-ignore
-        Math.floor(raiseRange?.[1].$d.getTime() / 1000)
-      )
+        // Math.floor(raiseRange?.[1].$d.getTime() / 1000)
+      );
+
       extendedSaleState.calculatePriceStateConfig = {
         sources,
         constants,
         stackLength: 10,
-        argumentsLength: 0
-      }
+        argumentsLength: 0,
+      };
       extendedSaleState.dustSize = 0;
 
       // big numbers
       // extendedSaleState.cooldownDuration = ethers.utils.parseUnits(extendedSaleState.cooldownDuration.toString())
-      extendedSaleState.minimumRaise = ethers.utils.parseUnits(extendedSaleState.minimumRaise.toString())
-      extendedSaleState.minimumTier = extendedSaleState.minimumStatus;
+      extendedSaleState.minimumRaise = ethers.utils.parseUnits(
+        extendedSaleState.minimumRaise.toString()
+      );
 
       let extendedRedeemableState: any = redeemableState;
       // todo find a way to do away with this
@@ -209,9 +221,10 @@ export default function DeploySaleExample({}: any) {
         name: extendedRedeemableState.name,
         symbol: extendedRedeemableState.symbol,
         distributor: ethers.constants.AddressZero,
-        initialSupply: ethers.utils.parseUnits(extendedRedeemableState.initialSupply.toString())
-      }
-
+        initialSupply: ethers.utils.parseUnits(
+          extendedRedeemableState.initialSupply.toString()
+        ),
+      };
 
       // todo might need to remove: price, saleTimeout, startBlock
       // todo might need to remove initial supply (2nd one), minimum status, name, symbol, raiseRange, walletCap
@@ -225,10 +238,16 @@ export default function DeploySaleExample({}: any) {
       delete extendedRedeemableState.raiseRange;
       delete extendedRedeemableState.walletCap;
 
+      console.log(
+        "Submitting the following state:",
+        extendedSaleState,
+        extendedRedeemableState
+      );
 
-      console.log('Submitting the following state:', extendedSaleState, extendedRedeemableState);
-
-      const txDeploy = await saleFactory.createChildTyped(saleState, redeemableState);
+      const txDeploy = await saleFactory.createChildTyped(
+        saleState,
+        redeemableState
+      );
       const receipt = await txDeploy.wait();
       const saleContractAddress = getNewChildFromReceipt(receipt, saleFactory);
       console.log(saleContractAddress);
@@ -246,11 +265,10 @@ export default function DeploySaleExample({}: any) {
       }
 
       console.log(sale); // the sale contract
-
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   /**
    * View
@@ -258,44 +276,60 @@ export default function DeploySaleExample({}: any) {
   return (
     <div className="App">
       <main className="App-main">
-
         <Typography variant="h4">Deploy Sale Example</Typography>
 
-        <br/>
+        <br />
 
         <Button variant="contained" onClick={connectWalletHandler}>
           Connect
         </Button>
 
-        <br/>
+        <br />
 
         <Typography>{`Connected as: ${currentAccount}`}</Typography>
 
-        <br/>
+        <br />
 
-        <SaleForm defaults={defaults.sale} saleState={saleState} setSaleState={setSaleState} currentAccount={currentAccount}/>
+        <SaleForm
+          defaults={defaults.sale}
+          saleState={saleState}
+          setSaleState={setSaleState}
+          currentAccount={currentAccount}
+        />
 
-        <RedeemableForm defaults={defaults.redeemable} redeemableState={redeemableState} setRedeemableState={setRedeemableState}/>
+        <RedeemableForm
+          defaults={defaults.redeemable}
+          redeemableState={redeemableState}
+          setRedeemableState={setRedeemableState}
+        />
 
         <Button variant="contained" onClick={deploySaleExample}>
           Deploy Sale Example
         </Button>
 
-        <br/>
+        <br />
 
-        <Divider variant="middle" style={{ background: 'white', width: '90%' }} />
+        <Divider
+          variant="middle"
+          style={{ background: "white", width: "90%" }}
+        />
 
-        <br/>
+        <br />
 
-        <Link href="https://docs.rainprotocol.xyz/guides/Opcodes/running-an-opcodes-example" variant="body2">
+        <Link
+          href="https://docs.rainprotocol.xyz/guides/Opcodes/running-an-opcodes-example"
+          variant="body2"
+        >
           Tutorial
         </Link>
 
-        <Link href="https://github.com/beehive-innovation/examples.rainprotocol.xyz" variant="body2">
+        <Link
+          href="https://github.com/beehive-innovation/examples.rainprotocol.xyz"
+          variant="body2"
+        >
           Github
         </Link>
-
       </main>
     </div>
-  )
+  );
 }
