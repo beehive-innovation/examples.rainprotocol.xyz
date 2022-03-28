@@ -1,0 +1,21 @@
+{
+  "sale": {
+    "recipient": "",
+    "reserve": "0x25a4dd4cd97ed462eb5228de47822e636ec3e31a",
+    "startBlock": 24407548,
+    "cooldownDuration": 100,
+    "saleTimeout": 100,
+    "minimumRaise": 1000,
+    "price": 10
+  },
+  "redeemable": {
+    "name": "Raise token",
+    "symbol": "rTKN",
+    "initialSupply": 1000,
+    "distributionEndForwardingAddress": "0x0000000000000000000000000000000000000000",
+    "walletCap": 10,
+    "tier": "0xC064055DFf6De32f44bB7cCB0ca59Cbd8434B2de",
+    "minimumTier": 0,
+    "raiseRange": null
+  }
+}
