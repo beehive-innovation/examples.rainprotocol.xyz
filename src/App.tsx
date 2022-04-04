@@ -16,6 +16,7 @@ import HomePage from "./pages/HomePage";
 import ListItemLink from "./components/ListItemLink";
 import OpcodeCalculatorExample from "./examples/OpcodeCalculatorExample/OpcodeCalculatorExample";
 import DeploySaleExample from "./examples/DeploySaleExample/DeploySaleExample";
+import DeployGatedNFTExample from "./examples/DeployGatedNFTExample/DeployGatedNFTExample";
 
 const drawerWidth = 240;
 
@@ -37,6 +38,7 @@ function App() {
         <ListItemLink to="/basic-interaction-example" text="Basic Interaction Example" />
         <ListItemLink to="/opcode-calculator-example" text="Opcode Calculator Example" />
         <ListItemLink to="/deploy-sale-example" text="Deploy Sale Example" />
+        <ListItemLink to="/deploy-gatednft-example" text="Deploy GatedNFT Example" />
       </List>
     </div>
   );
@@ -126,6 +128,13 @@ function App() {
               path="/deploy-sale-example"
               element={
                 <DeploySaleExample />
+              }
+            />
+            <Route
+              key={'deploy-gatednft-example'}
+              path="/deploy-gatednft-example"
+              element={
+                <DeployGatedNFTExample />
               }
             />
 

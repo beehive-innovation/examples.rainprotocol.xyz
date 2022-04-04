@@ -1,0 +1,19 @@
+{
+  "gatedNFT": {
+    "config": {},
+    "name": "My Gated NFT",
+    "symbol": "myGNFT",
+    "description": "My Gated NFT can be used to token gate things",
+    "animationUrl": "",
+    "animationHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "imageUrl": "https://thumbs.dreamstime.com/b/gold-badge-5392868.jpg",
+    "imageHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "tier": "0xcd953b94999808ee07a33860dd46689580c90cf4",
+    "minimumStatus": 2,
+    "maxPerAddress": 2,
+    "transferrable": 0,
+    "maxMintable": 10,
+    "royaltyRecipient": "",
+    "royaltyBPS": 10
+  }
+}
