@@ -1,15 +1,15 @@
 import "../../App.css";
 import React, { useState } from "react";
-import { networks } from "./networks";
 import { Contract, ethers } from "ethers";
-import saleFactoryABI from "./saleFactoryABI.json";
-import saleContractABI from "./saleContractABI.json";
 import defaults from "./defaults.json";
 import { Button, Divider, Link, Typography } from "@mui/material";
 import SaleForm from "./SaleForm";
 import RedeemableForm from "./RedeemableForm";
 import { concat } from "ethers/lib/utils";
 import { op } from "./utils";
+import { Sale } from "@unegma/rain-sdk";
+
+const CHAIN_ID = 8001;
 
 export const enum Opcode {
   SKIP,
@@ -102,6 +102,7 @@ export default function DeploySaleExample({}: any) {
   const [currentAccount, setCurrentAccount] = useState("");
   const [saleState, setSaleState] = useState(defaults.sale);
   const [redeemableState, setRedeemableState] = useState(defaults.redeemable);
+  const [saleContractAddress, setSaleContractAddress] = useState("");
 
   /**
    * Minimal connectWalletHandler functinality
@@ -117,7 +118,7 @@ export default function DeploySaleExample({}: any) {
     try {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
-        chainId: networks[0].config.chainId,
+        chainId: CHAIN_ID,
       });
       console.log(`Address ${accounts[0]} connected`);
       setCurrentAccount(accounts[0]);
@@ -139,8 +140,8 @@ export default function DeploySaleExample({}: any) {
 
     try {
       const provider = new ethers.providers.Web3Provider(ethereum, {
-        name: networks[0].config.chainName,
-        chainId: parseInt(networks[0].config.chainId),
+        name: 'Mumbai',
+        chainId: CHAIN_ID,
       });
 
       // Prompt user for account connections
@@ -148,13 +149,6 @@ export default function DeploySaleExample({}: any) {
       const signer = provider.getSigner();
       console.log("Account:", await signer.getAddress());
 
-      // todo will use typechain
-      // @ts-ignore
-      const saleFactory = new ethers.Contract(
-        networks[0].addresses.SALE_FACTORY,
-        saleFactoryABI.abi,
-        signer
-      );
 
       const staticPrice = 100; // todo this might not work and is not currently retreived dynamically here from a reserveErc20
       const walletCap = 10; // too see above
@@ -244,27 +238,23 @@ export default function DeploySaleExample({}: any) {
         extendedRedeemableState
       );
 
-      const txDeploy = await saleFactory.createChildTyped(
-        saleState,
-        redeemableState
+      const result = await Sale.deploy(
+        signer,
+        CHAIN_ID,
+        {
+          saleConfig: extendedSaleState,
+          saleRedeemableERC20Config: extendedRedeemableState
+        }
       );
-      const receipt = await txDeploy.wait();
-      const saleContractAddress = getNewChildFromReceipt(receipt, saleFactory);
-      console.log(saleContractAddress);
 
-      const sale = new ethers.Contract(
-        saleContractAddress,
-        saleContractABI.abi,
-        signer
-      ) as Contract;
 
-      if (!ethers.utils.isAddress(sale.address)) {
-        throw new Error(
-          `invalid sale address: ${sale.address} (${sale.address.length} chars)`
-        );
-      }
-
-      console.log(sale); // the sale contract
+      // if (!ethers.utils.isAddress(sale.address)) {
+      //   throw new Error(
+      //     `invalid sale address: ${sale.address} (${sale.address.length} chars)`
+      //   );
+      // }
+      console.log(result); // the sale contract
+      setSaleContractAddress(result.address)
     } catch (err) {
       console.log(err);
     }
@@ -308,6 +298,10 @@ export default function DeploySaleExample({}: any) {
         </Button>
 
         <br />
+
+        <Typography>{`Sale Contract Address: ${saleContractAddress}`}</Typography>
+
+        <br/>
 
         <Divider
           variant="middle"
