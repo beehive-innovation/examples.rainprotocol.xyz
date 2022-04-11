@@ -1,6 +1,5 @@
 import "../../App.css";
 import React, { useState } from "react";
-import { networks } from "./networks";
 import {BigNumber, Contract, ethers} from "ethers";
 import defaults from "./defaults.json";
 import { Button, Divider, Link, Typography } from "@mui/material";
@@ -43,7 +42,7 @@ export default function DeployGatedNFTExample({}: any) {
     try {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
-        chainId: networks[0].config.chainId,
+        chainId: CHAIN_ID,
       });
       console.log(`Address ${accounts[0]} connected`);
       setCurrentAccount(accounts[0]);
@@ -65,8 +64,8 @@ export default function DeployGatedNFTExample({}: any) {
 
     try {
       const provider = new ethers.providers.Web3Provider(ethereum, {
-        name: networks[0].config.chainName,
-        chainId: parseInt(networks[0].config.chainId),
+        name: 'Mumbai',
+        chainId: CHAIN_ID,
       });
 
       // Prompt user for account connections
