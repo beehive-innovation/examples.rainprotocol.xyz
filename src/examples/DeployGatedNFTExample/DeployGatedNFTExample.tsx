@@ -2,10 +2,12 @@ import "../../App.css";
 import React, { useState } from "react";
 import { networks } from "./networks";
 import {BigNumber, Contract, ethers} from "ethers";
-import gatedNFTFactoryABI from "./gatedNFTFactoryABI.json";
 import defaults from "./defaults.json";
 import { Button, Divider, Link, Typography } from "@mui/material";
 import GatedNFTForm from "./GatedNFTForm";
+import { GatedNFT } from "@unegma/rain-sdk";
+
+const CHAIN_ID = 8001;
 
 /**
  * DeploySaleExample
@@ -72,25 +74,20 @@ export default function DeployGatedNFTExample({}: any) {
       const signer = provider.getSigner();
       console.log("Account:", await signer.getAddress());
 
-      // todo will use typechain
-      // @ts-ignore
-      const gatedNFTFactory = new ethers.Contract(
-        networks[0].addresses.GATED_NFT_FACTORY,
-        gatedNFTFactoryABI.abi,
-        signer
-      );
-
-
       // @ts-ignore
       gatedNFTState.royaltyBPS = BigNumber.from(
         Math.floor(gatedNFTState.royaltyBPS * 100)
       ); // todo check this
 
       // could put the defaults directly into config.param, but will need to refactor the `handleChangeState` function in the GatedNFTForm
-      gatedNFTState.config = {
-        name: gatedNFTState.name, symbol: gatedNFTState.symbol, description: gatedNFTState.description,
-        animationUrl: gatedNFTState.animationUrl, animationHash: gatedNFTState.animationHash,
-        imageUrl: gatedNFTState.imageUrl, imageHash: gatedNFTState.imageHash,
+      const gatedNFTConfig = gatedNFTState.config = {
+        name: gatedNFTState.name,
+        symbol: gatedNFTState.symbol,
+        description: gatedNFTState.description,
+        animationUrl: gatedNFTState.animationUrl,
+        imageUrl: gatedNFTState.imageUrl,
+        animationHash: gatedNFTState.animationHash,
+        imageHash: gatedNFTState.imageHash,
       }
 
       console.log(
@@ -98,31 +95,26 @@ export default function DeployGatedNFTExample({}: any) {
         gatedNFTState,
       );
 
-      const txDeploy = await gatedNFTFactory.createChildTyped(
-        gatedNFTState.config,
-        gatedNFTState.tier, gatedNFTState.minimumStatus, gatedNFTState.maxPerAddress,
-        // gatedNFTState.transferrable.value, // todo check this
-        gatedNFTState.transferrable, // todo check this
-        gatedNFTState.maxMintable, gatedNFTState.royaltyRecipient, gatedNFTState.royaltyBPS
-      );
-      const receipt = await txDeploy.wait();
-      receipt.events.forEach((event: any) => {
-        if (event.event == "NewChild") {
-          let nftContractAddress = ethers.utils.defaultAbiCoder.decode(
-            ["address", "address"],
-            event.data
-          )[1];
-          setGatedNFTContractAddress(nftContractAddress);
+      const result = await GatedNFT.deploy(
+        signer,
+        CHAIN_ID,
+        {
+          config: gatedNFTConfig,
+          tier: gatedNFTState.tier,
+          minimumStatus: gatedNFTState.minimumStatus,
+          maxPerAddress: gatedNFTState.maxPerAddress,
+          // gatedNFTState.transferrable.value, // todo check this
+          transferrable: gatedNFTState.transferrable, // todo check this
+          maxMintable: gatedNFTState.maxMintable,
+          royaltyRecipient: gatedNFTState.royaltyRecipient,
+          royaltyBPS: gatedNFTState.royaltyBPS
         }
-      });
+      );
 
-      // if (!ethers.utils.isAddress(gatedNFTContractAddress.address)) {
-      //   throw new Error(
-      //     `invalid sale address: ${gatedNFTContractAddress.address} (${gatedNFTContractAddress.address.length} chars)`
-      //   );
-      // }
+      setGatedNFTContractAddress(result.address)
 
-      console.log(receipt); // the sale contract
+      console.log(result);
+
     } catch (err) {
       console.log(err);
     }
