@@ -1,6 +1,6 @@
 import "../../App.css";
 import React, { useState } from "react";
-import {BigNumber, Contract, ethers} from "ethers";
+import {BigNumber, ethers} from "ethers";
 import defaults from "./defaults.json";
 import { Button, Divider, Link, Typography } from "@mui/material";
 import GatedNFTForm from "./GatedNFTForm";
@@ -33,14 +33,14 @@ export default function DeployGatedNFTExample({}: any) {
    */
   const connectWalletHandler = async () => {
     // @ts-ignore
-    const { ethereum } = window;
+    const { wallet } = window;
 
-    if (!ethereum) {
+    if (!wallet) {
       console.log("No Web3 Wallet installed");
     }
 
     try {
-      const accounts = await ethereum.request({
+      const accounts = await wallet.request({
         method: "eth_requestAccounts",
         chainId: CHAIN_ID,
       });
@@ -54,16 +54,16 @@ export default function DeployGatedNFTExample({}: any) {
   /**
    * Function for handling when the user submits the form
    */
-  const deploGatedNFTExample = async () => {
+  const deployGatedNFTExample = async () => {
     // @ts-ignore
-    const { ethereum } = window;
+    const { wallet } = window;
 
-    if (!ethereum) {
+    if (!wallet) {
       console.log("No Web3 Wallet installed");
     }
 
     try {
-      const provider = new ethers.providers.Web3Provider(ethereum, {
+      const provider = new ethers.providers.Web3Provider(wallet, {
         name: 'Mumbai',
         chainId: CHAIN_ID,
       });
@@ -150,7 +150,7 @@ export default function DeployGatedNFTExample({}: any) {
 
         <br/>
 
-        <Button variant="contained" onClick={deploGatedNFTExample}>
+        <Button variant="contained" onClick={deployGatedNFTExample}>
           Deploy GatedNFT Example
         </Button>
 
