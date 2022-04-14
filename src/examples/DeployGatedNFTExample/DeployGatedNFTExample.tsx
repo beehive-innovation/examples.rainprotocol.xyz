@@ -6,7 +6,7 @@ import { Button, Divider, Link, Typography } from "@mui/material";
 import GatedNFTForm from "./GatedNFTForm";
 import { GatedNFT } from "@unegma/rain-sdk";
 
-const CHAIN_ID = 8001;
+const CHAIN_ID = 80001;
 
 /**
  * DeploySaleExample
@@ -33,14 +33,14 @@ export default function DeployGatedNFTExample({}: any) {
    */
   const connectWalletHandler = async () => {
     // @ts-ignore
-    const { wallet } = window;
+    const { ethereum } = window;
 
-    if (!wallet) {
+    if (!ethereum) {
       console.log("No Web3 Wallet installed");
     }
 
     try {
-      const accounts = await wallet.request({
+      const accounts = await ethereum.request({
         method: "eth_requestAccounts",
         chainId: CHAIN_ID,
       });
@@ -56,14 +56,14 @@ export default function DeployGatedNFTExample({}: any) {
    */
   const deployGatedNFTExample = async () => {
     // @ts-ignore
-    const { wallet } = window;
+    const { ethereum } = window;
 
-    if (!wallet) {
+    if (!ethereum) {
       console.log("No Web3 Wallet installed");
     }
 
     try {
-      const provider = new ethers.providers.Web3Provider(wallet, {
+      const provider = new ethers.providers.Web3Provider(ethereum, {
         name: 'Mumbai',
         chainId: CHAIN_ID,
       });
