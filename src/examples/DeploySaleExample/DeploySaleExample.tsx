@@ -11,6 +11,8 @@ import { Sale } from "@unegma/rain-sdk";
 
 const CHAIN_ID = 8001;
 
+// todo node example and frontend example
+
 export const enum Opcode {
   SKIP,
   VAL,
